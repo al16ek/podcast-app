@@ -1,5 +1,6 @@
 import { Question } from "./question"
 import { createModal, isValid } from "./util"
+import { getLoginForm, signUpWithEmailAndPassword } from "./login"
 import { authWithEmailAndPassword, getAuthForm } from "./auth"
 import "./style.css"
 
@@ -37,9 +38,28 @@ function submitFormHandler(event) {
 
 function openModal() {
   createModal("Авторизация", getAuthForm())
+  document.getElementById("signUpBtn").addEventListener("click", (event) => {
+    event.preventDefault()
+    console.log("click")
+    createModal("Регистрация", getLoginForm())
+    document
+      .getElementById("auth-form")
+      .addEventListener("submit", signUpFormHandler, { once: true })
+  })
   document
     .getElementById("auth-form")
     .addEventListener("submit", authFormHandler, { once: true })
+}
+
+function signUpFormHandler(event) {
+  event.preventDefault()
+  const btn = event.target.querySelector("button")
+  const email = event.target.querySelector("#email").value
+  const password = event.target.querySelector("#password").value
+
+  signUpWithEmailAndPassword(email, password)
+    .then(Question.fetch)
+    .then(() => (btn.disabled = false))
 }
 
 function authFormHandler(event) {

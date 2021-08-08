@@ -20,11 +20,19 @@ export function getAuthForm() {
             <button
               type="submit"
               class="mui-btn mui-btn--raised mui-btn mui-btn--primary"
-              
+  
             >
               Войти
             </button>
         </form>
+        <button
+              id="signUpBtn"
+              type="submit"
+              class="mui-btn mui-btn--raised mui-btn mui-btn--primary"
+              
+            >
+              Зарегистрироваться
+            </button>
     `
 }
 
